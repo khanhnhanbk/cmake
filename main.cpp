@@ -3,9 +3,9 @@
 #include <Windows.h>
 #else
 #include <unistd.h>
-#endif
 #include <sys/types.h>
 #include <sys/wait.h>
+#endif
 // #include <Windows.h>
 
 using namespace std;
