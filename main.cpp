@@ -1,43 +1,47 @@
-#include <bits/stdc++.h>
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#endif
-// #include <Windows.h>
-
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include "console.h"
 using namespace std;
 const string CHARACTER = "0123456789!@#$%^&*";
 const int CHARACTER_SIZE = CHARACTER.size();
-const int MAX_LENGTH = 80;
-const int MAX_SIZE = 20;
-string generateLine(int length) {
-    // random 
+int WIDTH;
+int HEIGHT;
+string generateLine(int length)
+{
+    // random
     string line;
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++)
+    {
         int num = rand() % 255;
-        if (num < CHARACTER_SIZE) {
+        if (num < CHARACTER_SIZE)
+        {
             line += CHARACTER[num];
-        } else {
+        }
+        else
+        {
             line += ' ';
         }
     }
     return line;
 }
-void printLines(vector<string> lines) {
-    system("clear");
+void printLines(vector<string> lines)
+{
+    clearScreen();
     // print reverse order
-    for (int i = lines.size() - 1; i >= 0; i--) {
+    for (int i = lines.size() - 1; i >= 0; i--)
+    {
         cout << lines[i] << endl;
     }
 }
-void nextLine(vector<string> &lines) {
-    string line = generateLine(MAX_LENGTH);
+void nextLine(vector<string> &lines)
+{
+    string line = generateLine(WIDTH);
     lines.push_back(line);
     // remove last line if it is too long
-    if (lines.size() > MAX_SIZE) {
+    if (lines.size() > HEIGHT)
+    {
         // lines.pop_back();
         // delete first line
         lines.erase(lines.begin());
@@ -45,14 +49,16 @@ void nextLine(vector<string> &lines) {
 }
 int main()
 {
-  srand(time(NULL));
-    system("clear");
+    srand(time(NULL));
+    getSize(WIDTH, HEIGHT);
+    HEIGHT--;
     vector<string> lines;
-    while (true) {
+    while (true)
+    {
         nextLine(lines);
         printLines(lines);
         // sleep for 0.5 seconds
-        usleep(70000); 
+        usleep(70000);
     }
     return 0;
 }
