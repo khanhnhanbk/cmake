@@ -4,6 +4,7 @@
 #else
 #include <sys/ioctl.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
 #endif
@@ -70,5 +71,20 @@ void preventResize()
     tcgetattr(STDIN_FILENO, &tty);
     tty.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &tty);
+#endif
+}
+// text color
+void setTextColor(int color)
+{
+#ifdef WIN32
+    // change text color and ignore error if color is not supported or black
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, color);
+#else
+    // text color (foreground) ignore if not supported or black
+    if (color >= 0 && color <= 7)
+    {
+        printf("\033[%dm", 30 + color);
+    }
 #endif
 }

@@ -29,6 +29,8 @@ string generateLine(int length)
 void printLines(vector<string> lines)
 {
     clearScreen();
+    // change text color
+    setTextColor(rand() % 10);
     // print reverse order
     for (int i = lines.size() - 1; i >= 0; i--)
     {
