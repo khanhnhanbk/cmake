@@ -72,7 +72,7 @@ void nextLine(vector<string> &lines)
 }
 int main()
 {
-    srand(time(NULL));
+    // srand(time(NULL));
     getSize(WIDTH, HEIGHT);
     HEIGHT--;
     vector<string> lines;
@@ -82,7 +82,7 @@ int main()
         nextLine(lines);
         printLines(lines);
         // sleep for 0.5 seconds
-        usleep(70000);
+        mySleep(30);
         count += (rand() % 19 + 1);
         if (count % 67 == 0)
         {
